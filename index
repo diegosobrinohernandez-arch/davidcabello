@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.C. David Cabello — Monterías Exclusivas · Castilla-La Mancha</title>
+<meta name="description" content="Monterías y recechos exclusivos en Castilla-La Mancha. Orgánica con nombre y apellidos. Teléfono: 600 791 106 (David Cabello)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Raleway:wght@300;400;500;600&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --verde:#2d5016;
+  --verde-vivo:#3d6b1e;
+  --verde-claro:#5a8a30;
+  --oro:#b8860b;
+  --oro-claro:#d4a520;
+  --crema:#f5f0e8;
+  --tierra:#8b6914;
+  --negro:#0c0d08;
+  --blanco:#ffffff;
+  --display:'Cinzel',serif;
+  --serif:'Playfair Display',serif;
+  --sans:'Raleway',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--negro);color:var(--crema);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden}
+
+/* PROGRESO */
+#progreso{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--verde-claro),var(--oro-claro));z-index:1000;transition:width .1s linear}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 2.5rem;
+  height:64px;
+  transition:background .3s,border-color .3s;
+}
+nav.scrolled{background:rgba(12,13,8,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(45,80,22,.25)}
+
+/* Izquierda: nombre */
+.logo-nav{
+  display:flex;flex-direction:column;justify-content:center;
+  text-decoration:none;
+}
+.logo-dc{
+  font-family:var(--display);font-size:1rem;letter-spacing:.14em;
+  color:var(--crema);line-height:1;
+}
+.logo-dc span{color:var(--verde-claro)}
+.logo-sub{
+  font-family:var(--sans);font-weight:300;font-size:.48rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(245,240,232,.35);margin-top:.22rem;
+}
+
+/* Centro: tagline — solo escritorio */
+.nav-tagline{
+  text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:.78rem;
+  color:rgba(245,240,232,.28);letter-spacing:.03em;
+  pointer-events:none;
+}
+
+/* Derecha: botón alineado a la derecha */
+.nav-cta{
+  display:flex;justify-content:flex-end;align-items:center;
+}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:#25D366;color:#fff;
+  font-family:var(--sans);font-weight:500;font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.46rem 1rem;border-radius:2px;text-decoration:none;
+  transition:background .2s,transform .15s;white-space:nowrap;
+}
+.btn-wa:hover{background:#1da851;transform:translateY(-1px)}
+
+/* Elementos heredados que ya no se usan */
+.logo-sep,.logo-organica-wrap{display:none}
+
+/* HERO */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:6vw;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 60% 30%, rgba(45,80,22,.65) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 75%, rgba(184,134,11,.1) 0%, transparent 50%),
+    linear-gradient(170deg, #080c04 0%, #12180a 50%, #060805 100%);
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.038'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:.7;z-index:0
+}
+#hero::after{
+  content:'';position:absolute;
+  top:0;right:20%;bottom:0;
+  width:1px;background:linear-gradient(180deg,transparent 0%,rgba(245,240,232,.05) 30%,rgba(245,240,232,.05) 70%,transparent 100%);
+  pointer-events:none;z-index:0
+}
+.hero-leaf{
+  position:absolute;right:6%;top:12%;
+  width:320px;height:320px;
+  opacity:.08;pointer-events:none;z-index:0;
+  animation:leafsway 8s ease-in-out infinite;
+}
+@keyframes leafsway{0%,100%{transform:rotate(-3deg) scale(1)}50%{transform:rotate(3deg) scale(1.03)}}
+
+.hero-inner{
+  position:relative;z-index:1;
+  padding:0 2.5rem 0 max(2.5rem, calc((100vw - 1100px)/2 + 2.5rem));
+}
+.hero-kicker{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;letter-spacing:.45em;text-transform:uppercase;
+  color:var(--oro-claro);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;
+  opacity:0;animation:au .7s .2s forwards
+}
+.hero-kicker::before{content:'';display:inline-block;width:26px;height:1px;background:var(--verde-claro)}
+h1{
+  font-family:var(--display);
+  font-size:clamp(4rem,11vw,9rem);
+  line-height:.92;color:var(--crema);
+  letter-spacing:.02em;margin-bottom:2.4rem;
+  opacity:0;animation:au .8s .4s forwards
+}
+h1 .verde{color:var(--verde-claro)}
+h1 .apellido{color:var(--crema)}
+.hero-lead{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(.95rem,1.5vw,1.2rem);
+  color:rgba(245,240,232,.55);max-width:440px;
+  line-height:2;margin-bottom:3rem;
+  opacity:0;animation:au .7s .6s forwards
+}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:au .7s .8s forwards
+}
+.btn-wa-lg{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:#25D366;color:#fff;
+  font-family:var(--sans);font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.85rem 1.8rem;border-radius:2px;text-decoration:none;
+  transition:background .2s,transform .2s,box-shadow .2s
+}
+.btn-wa-lg:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.2)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(245,240,232,.15);color:var(--crema);
+  font-family:var(--sans);font-weight:300;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.85rem 1.5rem;border-radius:2px;text-decoration:none;
+  transition:border-color .2s,background .2s
+}
+.btn-outline:hover{border-color:var(--oro-claro);background:rgba(212,165,32,.07)}
+.hero-stats{
+  display:flex;gap:0;
+  border-top:1px solid rgba(245,240,232,.07);padding-top:2.2rem;
+  opacity:0;animation:au .6s 1s forwards
+}
+.stat{padding:0 2.5rem 0 0;margin-right:2.5rem;border-right:1px solid rgba(245,240,232,.07)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--display);font-size:2.4rem;color:var(--oro-claro);line-height:1}
+.stat-l{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,240,232,.32);margin-top:.25rem}
+
+@keyframes au{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* BANDA */
+.banda{background:var(--verde);padding:.9rem 0;overflow:hidden;white-space:nowrap}
+.banda-track{display:inline-flex;gap:3rem;animation:bscroll 28s linear infinite}
+.banda-item{font-family:var(--sans);font-weight:400;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:1rem;flex-shrink:0}
+.banda-item::before{content:'✦';color:rgba(255,255,255,.35)}
+@keyframes bscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECCIONES */
+section{position:relative;z-index:1}
+.container{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+.sec-label{font-family:var(--sans);font-weight:300;font-size:.63rem;letter-spacing:.38em;text-transform:uppercase;color:var(--oro-claro);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+.sec-label::before{content:'';width:20px;height:1px;background:var(--verde-claro);display:inline-block;flex-shrink:0}
+h2.titulo{font-family:var(--display);font-size:clamp(2.6rem,5.5vw,4.5rem);line-height:.93;color:var(--crema);margin-bottom:1.2rem;letter-spacing:.03em}
+h2.titulo em{color:var(--verde-claro);font-style:normal}
+.desc{font-family:var(--serif);font-style:italic;font-size:1.08rem;color:rgba(245,240,232,.48);max-width:500px;line-height:1.85;margin-bottom:3.2rem}
+
+/* ===== TEMPORADA / FINCAS ===== */
+#temporada{padding:7rem 0 5rem}
+.monterias{display:flex;flex-direction:column;gap:.2rem}
+.mc{
+  display:grid;grid-template-columns:160px 1fr 90px max-content max-content max-content;
+  align-items:center;gap:1.2rem;
+  padding:1.2rem 1.6rem;
+  background:rgba(18,24,10,.45);
+  border:1px solid rgba(245,240,232,.05);
+  border-left:3px solid transparent;
+  transition:border-left-color .2s,background .2s,transform .2s;
+  position:relative
+}
+.mc:hover{border-left-color:var(--verde-claro);background:rgba(30,45,12,.55);transform:translateX(3px)}
+.mc.premium{border-left-color:var(--oro);background:rgba(40,30,5,.35)}
+.mc-finca{font-family:var(--serif);font-weight:700;font-style:italic;font-size:1.08rem;color:var(--crema);margin-bottom:.22rem}
+.mc-localidad{font-size:.74rem;color:rgba(245,240,232,.38);letter-spacing:.06em;text-transform:uppercase}
+.mc-puestos{text-align:center}
+.mc-puestos-n{font-family:var(--display);font-size:1.5rem;color:var(--crema);line-height:1}
+.mc-puestos-l{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:.15rem}
+.mc-esp{font-size:.72rem;color:rgba(245,240,232,.42);letter-spacing:.04em;max-width:100px}
+.badge{font-family:var(--sans);font-size:.6rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .6rem;border-radius:1px;white-space:nowrap}
+.bt{border:1px solid rgba(184,134,11,.35);color:var(--oro-claro);background:rgba(184,134,11,.08)}
+.be{border:1px solid rgba(90,138,48,.35);color:#8ac45a;background:rgba(90,138,48,.08)}
+.mc-rehalas{text-align:center}
+.mc-rehalas-n{font-family:var(--display);font-size:1.4rem;color:var(--oro-claro);line-height:1}
+.mc-rehalas-l{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:.15rem}
+
+/* BANNER ACCIONES */
+.accion{
+  margin-top:2rem;
+  background:linear-gradient(135deg,#1c3809 0%,#0e2004 100%);
+  border:1px solid rgba(45,80,22,.4);
+  padding:2.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem;
+  position:relative;overflow:hidden
+}
+.accion::after{content:'15';position:absolute;right:-.5rem;top:-1.5rem;font-family:var(--display);font-size:13rem;color:rgba(255,255,255,.03);line-height:1;pointer-events:none}
+.accion h3{font-family:var(--display);font-size:clamp(1.5rem,3.2vw,2.6rem);color:#fff;letter-spacing:.05em;margin-bottom:.3rem}
+.accion p{font-family:var(--sans);font-weight:300;font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.7}
+.accion-num{font-family:var(--display);font-size:clamp(2.6rem,5.5vw,4.8rem);color:var(--oro-claro);line-height:1}
+.accion-num small{font-family:var(--sans);font-size:.72rem;font-weight:300;letter-spacing:.15em;display:block;color:rgba(255,255,255,.4);text-transform:uppercase}
+.btn-wa-accion{display:inline-flex;align-items:center;gap:.55rem;background:#25D366;color:#fff;font-family:var(--sans);font-weight:500;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;padding:.88rem 1.8rem;border-radius:2px;text-decoration:none;transition:background .2s,transform .2s;white-space:nowrap}
+.btn-wa-accion:hover{background:#1da851;transform:translateY(-2px)}
+
+/* ===== FECHAS ===== */
+#fechas{padding:6rem 0;background:rgba(10,14,6,.5)}
+.fechas-aviso{
+  font-family:var(--serif);font-style:italic;
+  font-size:.95rem;color:rgba(245,240,232,.42);
+  max-width:700px;line-height:1.85;margin-bottom:3rem;
+}
+.fechas-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.8rem;
+  margin-bottom:2.5rem;
+}
+.fecha-item{
+  background:rgba(18,24,10,.5);
+  border:1px solid rgba(245,240,232,.06);
+  padding:1.1rem 1.4rem;
+  position:relative;
+  transition:border-color .2s,background .2s;
+  text-decoration:none;
+  display:block;
+}
+.fecha-item:hover{border-color:rgba(90,138,48,.3);background:rgba(30,45,12,.45)}
+.fecha-dia{font-family:var(--display);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--verde-claro);margin-bottom:.3rem}
+.fecha-num{font-family:var(--serif);font-weight:700;font-size:1.35rem;color:var(--crema);line-height:1}
+.fecha-mes{font-family:var(--sans);font-weight:300;font-size:.7rem;letter-spacing:.1em;color:rgba(245,240,232,.4);text-transform:uppercase;margin-top:.2rem}
+.fechas-nota{
+  font-family:var(--serif);font-style:italic;
+  font-size:.88rem;color:rgba(245,240,232,.3);
+  padding-top:1.5rem;border-top:1px solid rgba(245,240,232,.06);
+  max-width:600px;line-height:1.8;
+}
+
+/* ===== CONTACTO ===== */
+#contacto{padding:7rem 0;text-align:center}
+.wa-wrap{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin:3rem 0 2rem}
+.wa-card{
+  background:rgba(18,24,10,.55);border:1px solid rgba(245,240,232,.07);
+  padding:2.5rem 3rem;border-radius:3px;
+  display:flex;flex-direction:column;align-items:center;gap:1.1rem;
+  text-decoration:none;min-width:250px;
+  transition:border-color .25s,background .25s,transform .25s
+}
+.wa-card:hover{border-color:#25D366;background:rgba(37,211,102,.04);transform:translateY(-4px)}
+.wa-nombre{font-family:var(--display);font-size:2rem;color:var(--crema);letter-spacing:.05em}
+.wa-num{font-family:var(--serif);font-style:italic;font-size:1.12rem;color:rgba(245,240,232,.5)}
+.wa-btn{display:inline-flex;align-items:center;gap:.45rem;background:#25D366;color:#fff;font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.3rem;border-radius:2px;transition:background .2s}
+.wa-card:hover .wa-btn{background:#1da851}
+.wa-nota{font-family:var(--serif);font-style:italic;font-size:.92rem;color:rgba(245,240,232,.26)}
+
+/* FOOTER */
+footer{background:rgba(5,7,3,.97);border-top:1px solid rgba(45,80,22,.12);padding:3rem 0 2rem}
+.ft{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.ft-logo{font-family:var(--display);font-size:1.7rem;letter-spacing:.06em;color:var(--crema)}
+.ft-logo span{color:var(--verde-claro)}
+.ft-sub{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.2);margin-top:.2rem}
+.ft-links{display:flex;gap:2rem;flex-wrap:wrap}
+.ft-links a{color:rgba(245,240,232,.28);text-decoration:none;font-size:.78rem;font-weight:300;letter-spacing:.04em;transition:color .2s}
+.ft-links a:hover{color:var(--crema)}
+.ft-organica{display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;opacity:.32}
+.ft-organica-top{font-family:'Playfair Display',serif;font-style:italic;font-size:.88rem;color:var(--crema)}
+.ft-organica-bot{font-family:var(--sans);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crema)}
+.ft-bottom{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(245,240,232,.04);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.ft-bottom p{font-size:.7rem;color:rgba(245,240,232,.16);font-weight:300}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.r.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* WA ICON */
+.wi{display:inline-block;vertical-align:middle;flex-shrink:0}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{
+    grid-template-columns:1fr auto;
+    padding:0 1.4rem;
+    height:58px;
+  }
+  .nav-tagline{display:none}
+  .mc{grid-template-columns:1fr auto auto auto;gap:.8rem}
+  .mc-esp{font-size:.65rem}
+  .fechas-grid{grid-template-columns:repeat(2,1fr)}
+  .wa-wrap{flex-direction:column;align-items:center}
+  .ft{flex-direction:column;align-items:flex-start}
+  .ft-organica{align-items:flex-start}
+}
+@media(max-width:520px){
+  nav{
+    grid-template-columns:1fr auto;
+    padding:0 1rem;
+    height:54px;
+  }
+  .logo-sub{display:none}
+  h1{font-size:3.5rem}
+  .hero-inner{padding:0 1.5rem}
+  .mc{grid-template-columns:1fr auto;padding:1rem}
+  .mc-localidad{display:none}
+  .accion{flex-direction:column;align-items:flex-start}
+  .fechas-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div id="progreso"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#inicio" class="logo-nav">
+    <div>
+      <div class="logo-dc">S.C. DAVID<span>·</span>CABELLO</div>
+      <div class="logo-sub">Temporada 2025 · 2026 · Castilla-La Mancha</div>
+    </div>
+  </a>
+  <div class="nav-tagline">la Orgánica con nombre y apellidos</div>
+  <div class="nav-cta">
+    <a href="https://wa.me/34600791106?text=Hola%20David%2C%20me%20interesa%20información%20sobre%20las%20monterías" target="_blank" rel="noopener" class="btn-wa">
+      <svg class="wi" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      David Cabello
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div id="hero">
+    <svg class="hero-leaf" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 10 C80 10 70 30 75 50 C60 40 45 45 40 60 C35 75 50 85 65 80 C55 90 55 105 65 110 C70 115 80 112 85 105 C88 120 100 130 100 150 C100 130 112 120 115 105 C120 112 130 115 135 110 C145 105 145 90 135 80 C150 85 165 75 160 60 C155 45 140 40 125 50 C130 30 120 10 100 10Z" fill="currentColor" opacity="0.6"/>
+      <path d="M60 60 C50 45 35 40 25 50" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 50 C42 35 30 28 18 35" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M140 60 C150 45 165 40 175 50" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M150 50 C158 35 170 28 182 35" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+
+    <div class="hero-inner">
+      <div class="hero-kicker">Temporada 2025 / 2026 · Castilla-La Mancha</div>
+      <h1>DAVID<br><span class="verde">CABELLO</span></h1>
+      <p class="hero-lead">Una orgánica con nombre y apellidos. Monterías y recechos en las mejores fincas de Almadén, Alamillo, Agudo, Saceruela y Abenójar.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/34600791106?text=Hola%20David%2C%20quiero%20información%20sobre%20las%20monterías" target="_blank" rel="noopener" class="btn-wa-lg">
+          <svg class="wi" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Contactar — 600 791 106
+        </a>
+        <a href="#temporada" class="btn-outline">Ver fincas & fechas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDA -->
+<div class="banda">
+  <div class="banda-track">
+    <span class="banda-item">Jabalí</span>
+    <span class="banda-item">Ciervo</span>
+    <span class="banda-item">Corzo</span>
+    <span class="banda-item">Gamo</span>
+    <span class="banda-item">Gamo Albino</span>
+    <span class="banda-item">Montería y Caza</span>
+    <span class="banda-item">Trofeo</span>
+    <span class="banda-item">Almadén</span>
+    <span class="banda-item">Alamillo</span>
+    <span class="banda-item">Agudo</span>
+    <span class="banda-item">Saceruela</span>
+    <span class="banda-item">Abenójar</span>
+    <span class="banda-item">Jabalí</span>
+    <span class="banda-item">Ciervo</span>
+    <span class="banda-item">Corzo</span>
+    <span class="banda-item">Gamo</span>
+    <span class="banda-item">Gamo Albino</span>
+    <span class="banda-item">Montería y Caza</span>
+    <span class="banda-item">Trofeo</span>
+    <span class="banda-item">Almadén</span>
+    <span class="banda-item">Alamillo</span>
+    <span class="banda-item">Agudo</span>
+    <span class="banda-item">Saceruela</span>
+    <span class="banda-item">Abenójar</span>
+  </div>
+</div>
+
+<!-- TEMPORADA / FINCAS -->
+<section id="temporada">
+  <div class="container">
+    <div class="r">
+      <div class="sec-label">Oferta de fincas</div>
+      <h2 class="titulo">Las <em>mejores</em><br>fincas</h2>
+      <p class="desc">Selección exclusiva de 11 fincas en Ciudad Real. Monterías de montería y caza, y una montería de Trofeo.</p>
+    </div>
+
+    <div class="monterias r d1">
+
+      <div class="mc premium">
+        <div>
+          <div class="mc-finca">La Campana</div>
+          <div class="mc-localidad">Almadén</div>
+        </div>
+        <div class="mc-esp">J / C / Cv</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">38</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">5</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc">
+        <div>
+          <div class="mc-finca">La Caldelera</div>
+          <div class="mc-localidad">Almadén</div>
+        </div>
+        <div class="mc-esp">J / C / Cv</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">28</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">4</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc">
+        <div>
+          <div class="mc-finca">Suerte Ancha</div>
+          <div class="mc-localidad">Alamillo</div>
+        </div>
+        <div class="mc-esp">J / C / Cv / G / Ga</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">40</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">4</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc">
+        <div>
+          <div class="mc-finca">Las Plazuelas</div>
+          <div class="mc-localidad">Almadén</div>
+        </div>
+        <div class="mc-esp">J / C / Cv</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">35</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">4</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc premium">
+        <div>
+          <div class="mc-finca">Doña Elisa (Sierra y Morra)</div>
+          <div class="mc-localidad">Agudo</div>
+        </div>
+        <div class="mc-esp">J / C / Cv</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">50</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">10</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc">
+        <div>
+          <div class="mc-finca">Hoyas</div>
+          <div class="mc-localidad">Almadenejos</div>
+        </div>
+        <div class="mc-esp">J / C / Cv / G / Ga</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">35</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">5</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc">
+        <div>
+          <div class="mc-finca">Cañadahonda</div>
+          <div class="mc-localidad">Almadén</div>
+        </div>
+        <div class="mc-esp">J / C / Cv</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">28</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">4</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc premium">
+        <div>
+          <div class="mc-finca">La Perdiz Roja</div>
+          <div class="mc-localidad">Alamillo</div>
+        </div>
+        <div class="mc-esp">J / C / Cv / G / Ga</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">60</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">4</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc premium">
+        <div>
+          <div class="mc-finca">La Peñuela</div>
+          <div class="mc-localidad">Puebla de Don Rodrigo</div>
+        </div>
+        <div class="mc-esp">J / C / Cv</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">60</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">14</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+      <div class="mc">
+        <div>
+          <div class="mc-finca">Alboguero</div>
+          <div class="mc-localidad">Saceruela</div>
+        </div>
+        <div class="mc-esp">J / C / Cv</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">35</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">4</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge bt">Trofeo</span>
+      </div>
+
+      <div class="mc">
+        <div>
+          <div class="mc-finca">Navalmoro</div>
+          <div class="mc-localidad">Abenójar</div>
+        </div>
+        <div class="mc-esp">J / C / G</div>
+        <div class="mc-puestos">
+          <div class="mc-puestos-n">40</div>
+          <div class="mc-puestos-l">Puestos</div>
+        </div>
+        <div class="mc-rehalas">
+          <div class="mc-rehalas-n">8</div>
+          <div class="mc-rehalas-l">Rehalas</div>
+        </div>
+        <span class="badge be">Mata y Cuelga</span>
+      </div>
+
+    </div>
+
+    <div class="accion r d2">
+      <div>
+        <h3>SÓLO 15 ACCIONES<br>COMPLETAS A LA VENTA</h3>
+        <p>Reserva tu puesto antes de que se agoten.<br>Contacta directamente con David Cabello.</p>
+      </div>
+      <div class="accion-num">
+        15
+        <small>Acciones disponibles</small>
+      </div>
+      <a href="https://wa.me/34600791106?text=Hola%20David%2C%20quiero%20reservar%20una%20acción" target="_blank" rel="noopener" class="btn-wa-accion">
+        <svg class="wi" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Reservar acción — 600 791 106
+      </a>
+    </div>
+
+    <div class="r d3" style="margin-top:2rem;padding:1.2rem 1.6rem;background:rgba(18,24,10,.3);border:1px solid rgba(245,240,232,.05);font-size:.7rem;color:rgba(245,240,232,.35);letter-spacing:.08em;line-height:2;font-family:var(--sans)">
+      <strong style="color:rgba(245,240,232,.55);letter-spacing:.12em;text-transform:uppercase;font-size:.65rem">Especies:</strong>&nbsp;&nbsp;
+      J = Jabalí &nbsp;·&nbsp; C = Ciervo &nbsp;·&nbsp; Cv = Corzo &nbsp;·&nbsp; G = Gamo &nbsp;·&nbsp; Ga = Gamo Albino &nbsp;&nbsp;|&nbsp;&nbsp;
+      <strong style="color:rgba(245,240,232,.55);letter-spacing:.12em;text-transform:uppercase;font-size:.65rem">Tipo:</strong>&nbsp;&nbsp;
+      M y C = Mata y Cuelga &nbsp;·&nbsp; Trofeo = Montería de Trofeo
+    </div>
+
+  </div>
+</section>
+
+<!-- FECHAS -->
+<section id="fechas">
+  <div class="container">
+    <div class="r">
+      <div class="sec-label">Calendario de caza</div>
+      <h2 class="titulo">Fechas de<br><em>monterías</em></h2>
+      <p class="fechas-aviso">A continuación se detallan las fechas de todas las monterías, aunque no correspondiendo dichas fechas con el orden de cada montería de la tabla anterior.</p>
+    </div>
+
+    <div class="fechas-grid r d1">
+      <div class="fecha-item">
+        <div class="fecha-dia">Sábado</div>
+        <div class="fecha-num">10 Octubre</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Domingo</div>
+        <div class="fecha-num">1 Noviembre</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Sábado</div>
+        <div class="fecha-num">7 Noviembre</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Sábado</div>
+        <div class="fecha-num">14 Noviembre</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Sábado</div>
+        <div class="fecha-num">28 Noviembre</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Domingo</div>
+        <div class="fecha-num">6 Diciembre</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Domingo</div>
+        <div class="fecha-num">20 Diciembre</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Domingo</div>
+        <div class="fecha-num">3 Enero</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Sábado</div>
+        <div class="fecha-num">6 Febrero</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Sábado</div>
+        <div class="fecha-num">13 Febrero</div>
+      </div>
+      <div class="fecha-item">
+        <div class="fecha-dia">Sábado</div>
+        <div class="fecha-num">20 Febrero</div>
+      </div>
+    </div>
+
+    <p class="fechas-nota r d2">La orgánica se reserva el derecho a modificar alguna fecha de cacería si así fuese necesario.</p>
+
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="r">
+      <div class="sec-label">Contacto directo</div>
+      <h2 class="titulo">Habla con<br><em>David</em></h2>
+      <p class="desc">Contacta directamente con el organizador para reservar tu acción o resolver cualquier duda sobre las fincas y fechas.</p>
+    </div>
+    <div class="wa-wrap r d1">
+      <a href="https://wa.me/34600791106?text=Hola%20David%2C%20me%20interesa%20información%20sobre%20las%20monterías%20de%20la%20orgánica" target="_blank" rel="noopener" class="wa-card">
+        <div class="wa-nombre">DAVID</div>
+        <div style="font-family:var(--display);font-size:.75rem;letter-spacing:.2em;color:rgba(245,240,232,.35);text-transform:uppercase">Cabello</div>
+        <div class="wa-num">600 791 106</div>
+        <div class="wa-btn">
+          <svg class="wi" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Escribir por WhatsApp
+        </div>
+      </a>
+    </div>
+    <p class="wa-nota r d2">Contacto exclusivamente para información sobre acciones, fincas y calendario de monterías.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft">
+      <div>
+        <div class="ft-logo">S.C. DAVID<span>·</span>CABELLO</div>
+        <div class="ft-sub">Monterías · Castilla-La Mancha · Temporada 2025/26</div>
+      </div>
+      <nav class="ft-links">
+        <a href="#temporada">Fincas</a>
+        <a href="#fechas">Fechas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="ft-organica">
+        <span class="ft-organica-top">la Orgánica</span>
+        <span class="ft-organica-bot">con nombre y apellidos</span>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>© 2025 S.C. David Cabello · Monterías en Castilla-La Mancha</p>
+      <p>Caza responsable · Respeto al medio y la fauna</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const prog=document.getElementById('progreso');
+  window.addEventListener('scroll',()=>{
+    prog.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';
+  },{passive:true});
+
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50),{passive:true});
+
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}})
+  },{threshold:.08});
+  document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+  document.querySelectorAll('[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const t=document.querySelector(a.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+    });
+  });
+})();
+</script>
+</body>
+</html>
